@@ -1,5 +1,5 @@
 
-| korean[ko] | english[en] |
+| korean[ko](https://github.com/nameje/coni/blob/main/README.md) | english[en](https://github.com/nameje/coni/blob/main/README_english.md) |
 | ---------- | ----------- |
 
 # 사용방법(작업영역 폴더에서 구성하는 것을 권장)
