@@ -1,5 +1,3 @@
-Of course. Here is the English translation of the provided text.
-
 # **Code of Conduct**
 
 ---
