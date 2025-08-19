@@ -7,28 +7,25 @@
 
 ## gemini cli(사전에 [gemini cli 설치](https://github.com/google-gemini/gemini-cli))
 
-> 에이전트의 문제일지 행동규범 아직 최적화가 덜 되서일지 워크플로우에 따르지 않는 문제가 가끔 발생합니다. 그런경우 esc 키로 멈추어서 'coni의 워크플로우에 맞추어서 작업 진행해' 와 같은 명령어를 넣으면 잘 작동됩니다.
-> a2a 프로토콜의 미적용으로 토큰발생량이 많아 발생하는 문제들이 있습니다.(경우에 따라 프로젝트의 하나의 run 동안 입력으로 5~8천만 토큰 사용) 이 문제는 [gemini-cli: issues(#5000)](https://github.com/google-gemini/gemini-cli/issues/5000) 이 해결된다면 sub-agent로 구성 예정입니다..
+> claude code와 같이 sub-agent가 적용되지 않아 토큰발생량이 많아 발생하는 문제(속도가 느림)들이 있습니다.(경우에 따라 프로젝트의 하나의 run 동안 입력으로 최대 5억 이상의 토큰 사용) 이 문제는 [gemini-cli: issues(#5000)](https://github.com/google-gemini/gemini-cli/issues/5000) 제기하였으며, 현재는 별도 방식을 통해 sub-agent로 구성하였습니다.
 
-- 작업영역 폴더에 GEMINI.md 를 붙여넣기
-- 터미널 또는 파워쉘에서 gemini 실행
+1. gemini를 실행하기 전 아래의 설정이 필요합니다.
+	- 작업영역 폴더에 agnet_system 하위 폴더 및 파일 붙여넣기
+	- data/ 폴더에 작업 관리 자료 붙여넣기
+	- guidelines/ 폴더에 작업관련 가이드라인과 에이전트를 위한 페르소나(claude code에서의 sub-agent 구성 파일도 포함) 붙여넣기(각 작업성격에 맞추어서 플래너는 작업에 맞는 가이드라인과 페르소나를 제공해줌. 페스소나의 갯수 제한 없음.)
+	- settings/ 폴더에 mcp_list 작성(ai가 사용할 mcp에 대해 설명과 방법등을 명시. 기존 ai를 활용하여 작성하여도 됩니다.)
+	- settings/ 폴더에 set_phases 작성: 최종결과까지의 과정이 작은단위의 결과물의 연결인 경우. 하나의 결과물을 원할 경우 phase는 하나만 작성.
+	- settings/ 폴더에 set_stages 작성: 결과물 단위의 진행 단계 설정. 특별히 요구할 사항이 없는 경우 기본 설정된 내용으로 진행.
+2. 위 설정 후 작업영역 폴더에서 `gemini` 실행.(별도 권한 설정을 하지 않을 경우 `gemini -y`)
+3. 요청사항 작성 후 '코니해' 라고 지시.
 
 ## claude code(사전에 [claude code 설치](https://www.anthropic.com/claude-code))
 
-> claude code는 테스트 결과 sub_agent로의 위임이 성공적으로 진행됨. 익스큐터의 task 진행 시 자체적인 계획을 수립 후 결과물을 작성하여 더욱 디테일한 과정을 통해 사고함. 
+> claude code는 테스트 결과 sub_agent로의 위임이 성공적으로 진행됨. claude code의 실행환경에 맞추어서 일부 수정 예정. 또는 gemini cli를 기준으로 일부 작업 수행을 claude code로 수행할 수 있도록 수정 예정.
 
-- 작업영역 폴더에 CLAUDE.md 및 .claude 폴더(sub_agent 설정)를 붙여넣기
-- 터미널 또는 파워쉘에서 gemini 실행
+---
+run의 진행에 따라 이미 진행한 run_id의 결과물에 대해 추가적인 업데이트 이력 관리 등 프로젝트의 진행을 관리할 수 있습니다.
 
-## 실행 후(gemini cli, claude code 동일)
-
-> assets: 현재 프로젝트 또는 에이전트가 작업할 사항과 관련있는 자료 폴더
-> guidelines: 에이전트가 행해야하는 작업과 관련한 노하우 폴더(일반적으로 사용하고 있던 GEMINI.md, CLAUDE.md를 활용해도 됩니다.)
-> set_phase.md: 결과물들의 연속
-
-- assets, guidelines 폴더에 자료 업로드
-- settings 폴더에서 set_phase.md, set_major_stage.md 설정
-- 에이전트에게 지시할 사항과 함께 '**코니해**' 또는 '**새로운 run으로 코니해**'라고 지시
 
 ---
 # 1. 행동규범(이하 coni), 그 시작에 대하여

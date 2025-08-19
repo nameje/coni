@@ -1,28 +1,32 @@
 
-| korean                                                          | english                                                  |
-| --------------------------------------------------------------- | -------------------------------------------------------- |
-| [ko](https://github.com/nameje/coni/blob/main/README_korean.md) | [en](https://github.com/nameje/coni/blob/main/README.md) |
+| [korean](https://github.com/nameje/coni/blob/main/README_korean.md) | [english](https://github.com/nameje/coni/blob/main/README.md) |
+| ------------------------------------------------------------------- | ------------------------------------------------------------- |
+Of course. Here is the English translation of the provided text.
 
-# How to Use (Recommended to set up in the workspace folder)
+***
 
-## gemini cli (Requires prior [installation of gemini cli](https://github.com/google-gemini/gemini-cli))
+# How to Use
 
-> Occasionally, a problem occurs where the agent does not follow the code of conduct. It is unclear whether this is an issue with the agent or if the code of conduct is not yet fully optimized. In such cases, you can stop it by pressing the `esc` key and then give a command like, "Proceed with the task according to the workflow of the code of conduct," and it will work well.
-> (Users of the paid version of gemini cli should use it with caution as it can consume a lot of tokens.)
+## gemini cli (Pre-requisite: [Install gemini cli](https://github.com/google-gemini/gemini-cli))
 
-- Paste `GEMINI.MD` into the workspace folder.
-- Run `gemini` in the terminal or PowerShell.
-- Enter the following command: "Initialize the folder and file structure as specified in the code of conduct."
-- Paste your materials into `assets` (list of materials for analysis and reference) and `guidelines` (documents containing user know-how and detailed instructions for the agent regarding analysis/results).
-- Example of a task instruction: "Analyze the materials and write a report."
+> Unlike `claude code`, sub-agents are not natively applied, which leads to problems caused by high token generation (slower speeds). (In some cases, more than 500 million tokens can be used as input for a single project run.) This issue has been raised in [gemini-cli: issues(#5000)](https://github.com/google-gemini/gemini-cli/issues/5000), and we have currently implemented a workaround by configuring sub-agents through a separate method.
 
-## claude code (Requires prior [installation of claude code](https://www.anthropic.com/claude-code))
+1. Before running gemini, the following setup is required:
+    - Copy the `agent_system` subfolder and its files into the workspace folder.
+    - Copy the task management data into the `data/` folder.
+    - Copy the task-related guidelines and agent personas into the `guidelines/` folder (this also includes sub-agent configuration files from `claude code`). The planner will provide the appropriate guidelines and personas for each task. (There is no limit to the number of personas.)
+    - In the `settings/` folder, create an `mcp_list` file. This file should specify descriptions and methods for the MCPs the AI will use. (You can also use an existing AI to generate this.)
+    - In the `settings/` folder, create a `set_phases` file. This is for cases where the final result is a combination of smaller, incremental results. If you want a single output, create only one phase.
+    - In the `settings/` folder, create a `set_stages` file. This sets the progress stages for each deliverable. If there are no special requirements, you can proceed with the default settings.
+2. After the setup above, run `gemini` from the workspace folder. (If you haven't set specific permissions, use `gemini -y`.)
+3. After writing your request, give the instruction "coning".
 
-> I have not actually tested `claude code`. The following is written based on my personal hope and prediction that `gemini cli` will also support sub-agents in the future.
+## claude code (Pre-requisite: [Install claude code](https://www.anthropic.com/claude-code))
 
-- Paste `CLAUDE.MD` and the `.claude` folder into the workspace folder.
-- Run `claude` in the terminal or PowerShell.
-- The rest of the process is the same.
+> Tests have shown that `claude code` successfully delegates tasks to sub-agents. We plan to make some modifications to align with the `claude code` execution environment. Alternatively, we may adapt the system to allow some tasks based on `gemini cli` to be executed by `claude code`.
+
+---
+As the process runs, you can manage the project's overall progress, including tracking the update history for results from previously completed `run_id`s.
 
 ---
 # 1. On the Origins of the Code of Conduct
