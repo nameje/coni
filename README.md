@@ -1,10 +1,6 @@
 
 | [korean](https://github.com/nameje/coni/blob/main/README_korean.md) | [english](https://github.com/nameje/coni/blob/main/README.md) |
 | ------------------------------------------------------------------- | ------------------------------------------------------------- |
-Of course. Here is the English translation of the provided text.
-
-***
-
 # How to Use
 
 ## gemini cli (Pre-requisite: [Install gemini cli](https://github.com/google-gemini/gemini-cli))
